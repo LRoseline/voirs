@@ -1,0 +1,95 @@
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" xmlns="https://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+		<meta name="theme-color" content="#F29100">
+
+		<!-- Bootstrap Area -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+
+		<!-- React Area -->
+		<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>아산시 저수지 및 날씨정보 시스템</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin />
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin></script>
+        <link href="/css/map.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="map"></div>
+        <div class="credit">
+            <div class="credit-box">
+                <a class="close" href="javascript:void(0)" onclick="popupClose('.credit')">&times;</a>
+                <div class="credit-descript">
+                    <p>
+                        <b style="font-size: 18px;">OpenStreetMap</b><br>
+                        Data extracted from OpenStreetMap after September 2012 is licensed on terms of the Open Database License, "ODbL" 1.0, previously it was licensed CC-BY-SA 2.0.
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">한국농어촌공사_농촌용수 저수지 수위정보</b><br>
+                        COPYRIGHT(C) 2017 KRC.ALL RIGHT RESERVED.
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">Leaflet</b><br>
+                        © 2010-2022 Vladimir Agafonkin. Maps © OpenStreetMap contributors.<br>
+                        BSD 2-Clause "Simplified" License
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">Openweathermap</b><br>
+                        © 2012 — 2022 OpenWeather ® All rights reserved<br>
+                        Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0).
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">한국환경공단 에어코리아</b><br>
+                        Copyright @ 2018 한국환경공단. All rights reserved.
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">Chart.js</b><br>
+                        MIT license
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="sidemenu">
+            <button class="asan-btn-menu-x" onclick="NavSet('0', 'block')">&times;</button>
+            <a id="sidemenu-lind" href="javascript:void(0)" onclick="spread('.Lulu')">지역선택 <span class="Lulu-static"><i style="font-size: 16px;" class="bi bi-caret-down-fill"></i></span></a>
+            <div class="Lulu">
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('all')">전체</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('둔포면')">둔포면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('방축동')">방축동</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('배방읍')">배방읍</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('선장면')">선장면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('송악면')">송악면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('신창면')">신창면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('염치읍')">염치읍</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('영인면')">영인면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('음봉면')">음봉면</a>
+                <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('인주면')">인주면</a>
+            </div>
+            <a id="sidemenu-lind" href="javascript:void(0)" onclick="popupFlow('.credit')">라이센스 정보</a>
+        </div>
+        <nav class="brand-asan-home">
+            <span class="lefty">아산시 저수지/날씨</span>
+            <div class="sides">
+                <button class="weather" onclick="spread('.weather-side')">
+                    <i class="bi bi-moon"></i>| 23℃ <span class="weather-side-static"><i class="bi bi-caret-down-fill" style="font-size: 16px;"></i></span>
+                </button>
+                <button class="asan-btn-menu" onclick="NavSet('300', 'none')">&Colon;</button>
+                <div class="weather-side">
+                    날씨 열심히 준비중!
+                </div>
+            </div>
+        </nav>
+        <script src="/js/system.js"></script>
+        <script src="/js/loadmap.js"></script>
+        <script src="/js/station.js"></script>
+    </body>
+</html>
