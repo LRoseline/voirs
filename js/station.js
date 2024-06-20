@@ -9,7 +9,7 @@ const key = "08b333fbb27d18a08dc1";
 const header = {headers: {"Authentication": key}};
 
 function cmdr (station) {
-    axios.post("/api/reservoir/list/"+station, {}, header).then(r => {
+    axios.post("https://api.tsukimorifriends.xyz/api/reservoir/list/"+station, {}, header).then(r => {
         for (let index = 0; index < 18; index++) {
 
             const dex = r.data.body[index];
@@ -26,7 +26,7 @@ function cmdr (station) {
             checkpoint.addTo(map);
             
             checkpoint.on("click", function() {
-                axios.post("/api/reservoir/detail/"+dex.no, {}, header).then(t => {
+                axios.post("https://api.tsukimorifriends.xyz/api/reservoir/detail/"+dex.no, {}, header).then(t => {
                     Weather(dex.jurisdiction);
                     setTimeout(() => {
                         chartWater(t.data.body);
@@ -104,7 +104,7 @@ function datestring(dates) {
 }
 
 function Weather(location) {
-    const json = axios.post("/api/weather/current/"+location, {}, header);
+    const json = axios.post("https://api.tsukimorifriends.xyz/api/weather/current/"+location, {}, header);
 
     json.then(ras => {
         const w = ras.data.body.weather.current;
